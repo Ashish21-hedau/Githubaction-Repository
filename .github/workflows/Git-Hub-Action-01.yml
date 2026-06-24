@@ -11,6 +11,12 @@ on:
       - main
 
   workflow_dispatch:
+    
+permissions:
+  id-token: write
+  contents: read
+  
+  
 
 jobs:
   my_job:
@@ -20,15 +26,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+        
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./Githubaction-Repository
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ./Githubaction-Repository
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Terraform Init Validate Plan
-        run: |
-          terraform init
-          terraform validate
-          terraform plan
+      - name: Terraform Plan
+        run: terraform plan
+        working-directory: ./Githubaction-Repository
