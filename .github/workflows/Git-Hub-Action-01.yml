@@ -1,25 +1,34 @@
 name: Terraform pipeline CI
+
 on:
   push:
     branches:
-    - main/*
-    - release
+      - main
+      - release
+
   pull_request:
     branches:
-    - main
+      - main
+
   workflow_dispatch:
-  
+
 jobs:
-   my_job:  
-    name: deploy to staging prodection strategy
+  my_job:
+    name: Deploy to staging production strategy
     runs-on: ubuntu-22.04
-  
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Run a one-line script
         run: echo Hello, world!
-      - name: Run a multi-line script
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init Validate Plan
         run: |
-           Terraform Init
-           Terraform Validate
-           Terraform Plan 
+          terraform init
+          terraform validate
+          terraform plan
