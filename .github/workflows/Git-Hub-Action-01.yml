@@ -1,18 +1,25 @@
-name: CI
+name: Terraform pipeline CI
 on:
   push:
-    branches: [ "main" ]
+    branches:
+    - main/*
+    - release
   pull_request:
-    branches: [ "main" ]
+    branches:
+    - main
   workflow_dispatch:
+  
 jobs:
-  build:
-    runs-on: ubuntu-latest
+   my_job:  
+    name: deploy to staging prodection strategy
+    runs-on: ubuntu-22.04
+  
     steps:
       - uses: actions/checkout@v4
       - name: Run a one-line script
         run: echo Hello, world!
       - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+           Terraform Init
+           Terraform Validate
+           Terraform Plan 
