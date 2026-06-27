@@ -1,30 +1,46 @@
-# This is a basic workflow to help you get started with Actions
 
-name: Terraform-Workflow-CI
+name: Terraform Code Build Workflow-CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "main" ]
+    branches:
+       - "main"
+       - "feature"
+
   pull_request:
-    branches: [ "main" ]
+     branches: 
+       - "main"
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  permissions:
+    pull-requests: write
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  workflow-dispatch:
+      # inputs:
+      # environment:
+      #   description: "Choose environment"
+      #   required: true
+
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+   build:
+   TerraformBuild:
+      runs-on: ubuntu -letest
+      
+      staps:
+         - name: Terraform Code Checkout
+           user: actions/checkout@v7.0.0
+          #  with: 
+          #     token: ${{ secrets.GITHUB_TOKEN }}
+          #  with:
+          #     persist-credentials: false
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+         - name: Terraform Hashicrop SetUp in terraform Code
+           user: hashicorp/setup-terraform@v4.0.1
+          #  with: 
+          #     terraform_version: "1.14.6"
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, devops Insider!
+         - name: Terraform Infra code Deployment 
+           run: |
+                terraform Init
+                terraform validate
+                terraform Plan
+                terraform apply --auto-appove
