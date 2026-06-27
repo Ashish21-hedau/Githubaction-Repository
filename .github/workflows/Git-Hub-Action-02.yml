@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Terraform Code Checkout
         uses: actions/checkout@v4
+        
+      - name: Azure Login
+        uses: Azure/login@v3.0.0
 
       - name: Terraform Hashicorp Setup
         uses: hashicorp/setup-terraform@v3
