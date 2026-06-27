@@ -11,14 +11,14 @@ on:
      branches: 
        - "main"
 
-  permissions:
-     pull-requests: write
+  # permissions:
+  #    pull-requests: write
 
-  workflow-dispatch:
-      # inputs:
-      # environment:
-      #   description: "Choose environment"
-      #   required: true
+  # workflow-dispatch:
+  #     # inputs:
+  #     # environment:
+  #     #   description: "Choose environment"
+  #     #   required: true
 
 jobs:
    build:
