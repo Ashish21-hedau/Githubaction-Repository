@@ -24,7 +24,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init Plan validate apply Infra Code Deployment
-        working-directory: ./terraform
+        working-directory: ./Enviroment
         run: |
           terraform init
           terraform validate
