@@ -1,46 +1,28 @@
-
 name: Terraform Code Build Workflow-CI
-
 on:
   push:
     branches:
-       - "main"
-       - "feature"
-
+      - main
+      - feature
   pull_request:
-     branches: 
-       - "main"
-
-  # permissions:
-  #    pull-requests: write
-
-  # workflow-dispatch:
-  #     # inputs:
-  #     # environment:
-  #     #   description: "Choose environment"
-  #     #   required: true
-
+    branches:
+      - main
+  workflow_dispatch:
+  
 jobs:
-   build:
-   TerraformBuild:
-      runs-on: ubuntu -letest
-      
-      staps:
-         - name: Terraform Code Checkout
-           user: actions/checkout@v7.0.0
-          #  with: 
-          #     token: ${{ secrets.GITHUB_TOKEN }}
-          #  with:
-          #     persist-credentials: false
-
-         - name: Terraform Hashicrop SetUp in terraform Code
-           user: hashicorp/setup-terraform@v4.0.1
-          #  with: 
-          #     terraform_version: "1.14.6"
-
-         - name: Terraform Infra code Deployment 
-           run: |
-                terraform Init
-                terraform validate
-                terraform Plan
-                terraform apply --auto-appove
+  # build:
+  TerraformBuild:
+    runs-on: ubuntu -letest
+    staps:
+      - name: Terraform Code Checkout
+        user: actions/checkout@v7.0.0
+        
+      - name: Terraform Hashicrop SetUp in terraform Code
+        user: hashicorp/setup-terraform@v4.0.1
+        
+      - name: Terraform Infra code Deployment
+        run: |
+          terraform Init
+          terraform validate
+          terraform Plan
+          terraform apply --auto-appove
