@@ -12,7 +12,7 @@ on:
        - "main"
 
   permissions:
-    pull-requests: write
+     pull-requests: write
 
   workflow-dispatch:
       # inputs:
