@@ -1,28 +1,31 @@
 name: Terraform Code Build Workflow-CI
+
 on:
   push:
     branches:
       - main
       - feature
+
   pull_request:
     branches:
       - main
+
   workflow_dispatch:
-  
+
 jobs:
-  # build:
   TerraformBuild:
-    runs-on: ubuntu -letest
-    staps:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Terraform Code Checkout
-        user: actions/checkout@v7.0.0
-        
-      - name: Terraform Hashicrop SetUp in terraform Code
-        user: hashicorp/setup-terraform@v4.0.1
-        
-      - name: Terraform Infra code Deployment
+        uses: actions/checkout@v4
+
+      - name: Terraform Hashicorp Setup
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Infra Code Deployment
         run: |
-          terraform Init
+          terraform init
           terraform validate
-          terraform Plan
-          terraform apply --auto-appove
+          terraform plan
+          terraform apply --auto-approve
