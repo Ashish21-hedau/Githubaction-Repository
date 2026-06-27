@@ -23,8 +23,8 @@ jobs:
       - name: Terraform Hashicorp Setup
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Infra Code Deployment
-        working-directory: ./Githubaction-Repository
+      - name: Terraform Init Plan validate apply Infra Code Deployment
+        working-directory: ./terraform
         run: |
           terraform init
           terraform validate
