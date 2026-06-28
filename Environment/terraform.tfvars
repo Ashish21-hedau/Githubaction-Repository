@@ -6,7 +6,15 @@ rgmodule = {
       environment = "rg-Production"
     }
   }
+  rg2 = {
+    resource_group_name = "Git-hub-action-ResourceGroup2"
+    location            = "West US"
+    tags = {
+      environment = "rg-Production"
+    }
+  }
 }
+
 
 stgmodule = {
   stg1 = {
