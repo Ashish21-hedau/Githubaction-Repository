@@ -25,6 +25,11 @@ jobs:
     steps:
       - name: Terraform Code Checkout
         uses: actions/checkout@v4
+
+      - name: Terraform Scaning Security Tool 
+        uses: aquasecurity/tfsec-action@v1.0.3
+        with:
+           soft_fail: true
         
       - name: Azure Login
         uses: Azure/login@v3
@@ -35,6 +40,7 @@ jobs:
 
       - name: Terraform Hashicorp Setup
         uses: hashicorp/setup-terraform@v3
+
 
       - name: Terraform Init Plan validate apply Infra Code Deployment
         run: |
